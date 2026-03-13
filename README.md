@@ -73,8 +73,9 @@ The following MLflow functionalities were used:
 
 ### Experiment Creation
 
+```python
 mlflow.set_experiment("Iris_Experiment")
-
+```
 
 ### Run Tracking
 
@@ -82,13 +83,15 @@ Each execution creates a new run in MLflow.
 
 ### Parameter Logging
 
+```python
 mlflow.log_param()
-
+```
 
 ### Metric Logging
 
+```python
 mlflow.log_metric()
-
+```
 
 Metrics tracked:
 
@@ -107,16 +110,17 @@ The following artifacts are logged:
 
 The trained Random Forest model is logged using:
 
+```python
 mlflow.sklearn.log_model()
-
+```
 
 ### Model Registry
 
 The trained model is registered in MLflow Model Registry as:
 
-
+```
 MLflow_Iris_Classifier
-
+```
 
 ---
 
@@ -134,24 +138,24 @@ After validation, the trained model performs prediction successfully.
 
 ## Project Structure
 
-
+```
 end-to-end-mlflow-experimentation
 │
 ├── artifacts
 │
 ├── plots
-│ ├── confusion_matrix.png
-│ └── performance_comparison.png
+│   ├── confusion_matrix.png
+│   └── performance_comparison.png
 │
 ├── src
-│ └── train.py
+│   └── train.py
 │
 ├── data
 │
 ├── README.md
 ├── requirements.txt
 └── .gitignore
-
+```
 
 ---
 
@@ -159,23 +163,27 @@ end-to-end-mlflow-experimentation
 
 Activate virtual environment:
 
-
+```bash
 venv\Scripts\activate
-
+```
 
 Run the training pipeline:
 
+```bash
 python src/train.py
-
+```
 
 Start MLflow UI:
 
+```bash
 mlflow ui
-
+```
 
 Open in browser:
-127.0.0.1:5000
 
+```
+http://127.0.0.1:5000
+```
 
 ---
 
