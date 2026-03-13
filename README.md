@@ -2,200 +2,179 @@
 
 ## Overview
 
-This project demonstrates **end-to-end machine learning experiment tracking using MLflow**.  
-The experiment trains multiple models on the **Iris dataset** and tracks parameters, metrics, artifacts, and models using MLflow.
-
-The workflow also includes **model comparison, artifact logging, payload validation, and model registration** in the MLflow Model Registry.
-
----
+This project demonstrates end-to-end machine learning experiment tracking with MLflow using the Iris dataset. It trains multiple classification models, logs parameters and evaluation metrics, saves artifacts, validates inference payloads, and registers the best-performing model in the MLflow Model Registry.
 
 ## Objectives
 
-The main goals of this project are:
-
-- Implement MLflow experiment tracking
+- Track machine learning experiments with MLflow
 - Log model parameters and evaluation metrics
-- Generate and log artifacts such as plots
-- Validate input payload before inference
-- Register trained models in MLflow Model Registry
-- Compare multiple experiment runs
-
----
+- Generate and store visual artifacts
+- Validate inference payloads before prediction
+- Register trained models in the MLflow Model Registry
+- Compare multiple runs in the MLflow UI
 
 ## Dataset
 
-The project uses the **Iris dataset** from `sklearn.datasets`.
+The project uses the Iris dataset from `sklearn.datasets`.
 
-Dataset characteristics:
+### Dataset Summary
 
 - 150 samples
-- 4 numerical features
+- 4 numerical input features
 - 3 target classes
 
-Features:
+### Features
 
-- Sepal Length
-- Sepal Width
-- Petal Length
-- Petal Width
-
----
+- Sepal length
+- Sepal width
+- Petal length
+- Petal width
 
 ## Models Used
 
-Two machine learning models were trained and evaluated:
+Two machine learning models are trained and evaluated.
 
 ### Logistic Regression
 
-Used as a baseline linear classification model.
+Used as the baseline linear classifier.
 
-Parameters logged:
-- C
-- max_iter
-- solver
+Logged parameters:
+
+- `C`
+- `max_iter`
+- `solver`
 
 ### Random Forest Classifier
 
-Used as an ensemble learning model.
+Used as the ensemble model.
 
-Parameters logged:
-- max_depth
-- n_estimators
-- criterion
+Logged parameters:
 
----
+- `max_depth`
+- `n_estimators`
+- `criterion`
 
-## MLflow Experiment Tracking
+## MLflow Tracking Features
 
-MLflow was used to track the complete experiment lifecycle.
-
-The following MLflow functionalities were used:
+This project uses MLflow to manage the full experiment lifecycle.
 
 ### Experiment Creation
 
+```python
 mlflow.set_experiment("Iris_Experiment")
-
+```
 
 ### Run Tracking
 
-Each execution creates a new run in MLflow.
+Each model is executed inside its own MLflow run.
 
 ### Parameter Logging
 
-mlflow.log_param()
-
+```python
+mlflow.log_param("name", value)
+```
 
 ### Metric Logging
 
-mlflow.log_metric()
+```python
+mlflow.log_metric("metric_name", metric_value)
+```
 
-
-Metrics tracked:
+Tracked metrics include:
 
 - Accuracy
-- F1 Score
-- Precision
+- F1 score
 
 ### Artifact Logging
 
-The following artifacts are logged:
+The pipeline logs the following artifacts:
 
-- Confusion Matrix Plot
-- Model Performance Comparison Plot
+- Confusion matrix plot
+- Model performance comparison plot
 
 ### Model Logging
 
-The trained Random Forest model is logged using:
-
-mlflow.sklearn.log_model()
-
+```python
+mlflow.sklearn.log_model(model, "model_name")
+```
 
 ### Model Registry
 
-The trained model is registered in MLflow Model Registry as:
+The registered model name is:
 
-
+```text
 MLflow_Iris_Classifier
-
-
----
+```
 
 ## Payload Validation for Inference
 
-Before performing prediction, input data is validated to ensure:
+Before prediction, input data is validated to ensure:
 
-- Correct feature dimensions
-- No missing values
-- Proper numeric format
+- The feature count matches the training data
+- There are no missing values
+- The payload is suitable for numeric inference
 
-After validation, the trained model performs prediction successfully.
-
----
+After validation, the trained model performs prediction on the sample input.
 
 ## Project Structure
 
-
-end-to-end-mlflow-experimentation
-│
-├── artifacts
-│
-├── plots
-│ ├── confusion_matrix.png
-│ └── performance_comparison.png
-│
-├── src
-│ └── train.py
-│
-├── data
-│
-├── README.md
-├── requirements.txt
-└── .gitignore
-
-
----
+```text
+MLflow-Exp/
+|-- artifacts/
+|-- data/
+|-- mlruns/
+|-- plots/
+|   |-- confusion_matrix.png
+|   `-- performance_comparison.png
+|-- src/
+|   `-- train.py
+|-- LICENSE
+|-- README.md
+|-- main.py
+`-- requirements.txt
+```
 
 ## Running the Project
 
-Activate virtual environment:
+### 1. Activate the virtual environment
 
+```powershell
+venv\Scripts\Activate.ps1
+```
 
-venv\Scripts\activate
+### 2. Run the training pipeline
 
+```powershell
+python src\train.py
+```
 
-Run the training pipeline:
+### 3. Start the MLflow UI
 
-python src/train.py
-
-
-Start MLflow UI:
-
+```powershell
 mlflow ui
+```
 
+### 4. Open MLflow in the browser
 
-Open in browser:
-127.0.0.1:5000
-
-
----
+```text
+http://127.0.0.1:5000
+```
 
 ## Experiment Results
 
 After running the pipeline:
 
-- MLflow logs parameters and metrics
-- Artifacts such as plots are stored
-- Model versions appear in Model Registry
-- Multiple runs can be compared using MLflow UI
+- MLflow stores parameters and metrics for each run
+- Plot artifacts are saved and logged
+- The trained Random Forest model is logged and registered
+- Multiple runs can be reviewed and compared in the MLflow UI
 
 ### Best Model
 
-The **Random Forest Classifier** performed better than Logistic Regression based on:
+Based on the current script, the Random Forest classifier is presented as the stronger model using:
 
 - Accuracy
-- F1 Score
-
----
+- F1 score
 
 ## Technologies Used
 
@@ -207,11 +186,6 @@ The **Random Forest Classifier** performed better than Logistic Regression based
 - Matplotlib
 - Seaborn
 
----
-
 ## Conclusion
 
-This project demonstrates how MLflow can be used to manage the machine learning lifecycle.  
-Using MLflow simplifies experiment tracking, model comparison, and reproducibility in ML projects.
-
----
+This project shows how MLflow can be used to support reproducible machine learning workflows. It combines experiment tracking, artifact management, model comparison, validation, and model registration in a single pipeline.
